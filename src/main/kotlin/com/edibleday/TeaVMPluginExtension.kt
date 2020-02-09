@@ -1,6 +1,5 @@
 package com.edibleday
 
-import org.teavm.tooling.RuntimeCopyOperation
 import org.teavm.tooling.TeaVMTargetType
 
 open class TeaVMPluginExtension {
@@ -11,6 +10,5 @@ open class TeaVMPluginExtension {
     var copySources: Boolean? = null
     var generateSourceMap: Boolean? = null
     var minified: Boolean? = null
-    var runtime: RuntimeCopyOperation? = null
     var targetType: TeaVMTargetType? = null
 }

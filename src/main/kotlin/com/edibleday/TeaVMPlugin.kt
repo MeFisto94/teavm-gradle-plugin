@@ -22,8 +22,7 @@ import org.gradle.api.Project
 const val TASK_NAME = "teavmc"
 
 class TeaVMPlugin : Plugin<Project> {
-
-    val version = "0.5.1"
+    val version = "0.6.0"
 
     override fun apply(project: Project) {
 
@@ -75,7 +74,6 @@ class TeaVMPlugin : Plugin<Project> {
             task.copySources = extension.copySources ?: task.copySources
             task.generateSourceMap = extension.generateSourceMap ?: task.generateSourceMap
             task.minified = extension.minified ?: task.minified
-            task.runtime = extension.runtime ?: task.runtime
             task.targetType = extension.targetType ?: task.targetType
         }
     }

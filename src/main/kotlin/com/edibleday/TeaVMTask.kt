@@ -24,13 +24,11 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.TaskAction
-import org.teavm.tooling.RuntimeCopyOperation
 import org.teavm.tooling.TeaVMTargetType
 import org.teavm.tooling.TeaVMTool
 import org.teavm.tooling.sources.DirectorySourceFileProvider
 import org.teavm.tooling.sources.JarSourceFileProvider
 import java.io.File
-import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URLClassLoader
 
@@ -42,7 +40,6 @@ open class TeaVMTask : DefaultTask() {
     var copySources: Boolean = false
     var generateSourceMap: Boolean = false
     var minified: Boolean = true
-    var runtime: RuntimeCopyOperation = RuntimeCopyOperation.SEPARATE
     var targetType: TeaVMTargetType = TeaVMTargetType.JAVASCRIPT
 
     val gradleLog = Logging.getLogger(TeaVMTask::class.java)
@@ -118,7 +115,6 @@ open class TeaVMTask : DefaultTask() {
         cacheDirectory.mkdirs()
         tool.cacheDirectory = cacheDirectory
         tool.setIncremental(true)
-        tool.runtime = runtime
         tool.isMinifying = minified
         tool.log = log
         tool.isSourceFilesCopied = copySources
@@ -146,6 +142,5 @@ open class TeaVMTask : DefaultTask() {
             throw GradleException("Error gathering classpath information", e)
         }
     }
-
 
 }
