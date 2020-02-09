@@ -25,6 +25,7 @@ import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.TaskAction
 import org.teavm.tooling.RuntimeCopyOperation
+import org.teavm.tooling.TeaVMTargetType
 import org.teavm.tooling.TeaVMTool
 import org.teavm.tooling.sources.DirectorySourceFileProvider
 import org.teavm.tooling.sources.JarSourceFileProvider
@@ -42,6 +43,7 @@ open class TeaVMTask : DefaultTask() {
     var generateSourceMap: Boolean = false
     var minified: Boolean = true
     var runtime: RuntimeCopyOperation = RuntimeCopyOperation.SEPARATE
+    var targetType: TeaVMTargetType = TeaVMTargetType.WEBASSEMBLY
 
     val gradleLog = Logging.getLogger(TeaVMTask::class.java)
     val log by lazy { TeaVMLoggerGlue(project.logger) }
@@ -121,6 +123,7 @@ open class TeaVMTask : DefaultTask() {
         tool.log = log
         tool.isSourceFilesCopied = copySources
         tool.isSourceMapsFileGenerated = generateSourceMap
+        tool.targetType = targetType
 
         val classLoader = prepareClassLoader()
         classLoader.use {
