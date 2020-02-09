@@ -43,7 +43,7 @@ open class TeaVMTask : DefaultTask() {
     var generateSourceMap: Boolean = false
     var minified: Boolean = true
     var runtime: RuntimeCopyOperation = RuntimeCopyOperation.SEPARATE
-    var targetType: TeaVMTargetType = TeaVMTargetType.WEBASSEMBLY
+    var targetType: TeaVMTargetType = TeaVMTargetType.JAVASCRIPT
 
     val gradleLog = Logging.getLogger(TeaVMTask::class.java)
     val log by lazy { TeaVMLoggerGlue(project.logger) }
