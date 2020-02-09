@@ -11,4 +11,5 @@ open class TeaVMPluginExtension {
     var generateSourceMap: Boolean? = null
     var minified: Boolean? = null
     var targetType: TeaVMTargetType? = null
+    var incremental: Boolean? = null
 }

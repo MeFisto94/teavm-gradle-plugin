@@ -42,6 +42,7 @@ open class TeaVMTask : DefaultTask() {
     var generateSourceMap: Boolean = false
     var minified: Boolean = true
     var targetType: TeaVMTargetType = TeaVMTargetType.JAVASCRIPT
+    var incremental: Boolean = true
 
     val gradleLog = Logging.getLogger(TeaVMTask::class.java)
     val log by lazy { TeaVMLoggerGlue(project.logger) }
@@ -121,6 +122,7 @@ open class TeaVMTask : DefaultTask() {
         tool.isSourceFilesCopied = copySources
         tool.isSourceMapsFileGenerated = generateSourceMap
         tool.targetType = targetType
+        tool.isIncremental = incremental
 
         val classLoader = prepareClassLoader()
         classLoader.use {
