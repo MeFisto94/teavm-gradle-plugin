@@ -131,7 +131,7 @@ open class TeaVMTask : DefaultTask() {
                 tool.problemProvider.severeProblems.forEach { prob ->
                     consumer.clear()
                     prob.render(consumer)
-                    log.error(consumer.toString())
+                    log.error(consumer.text)
                 }
 
                 throw GradleException("TeaVM compilation errors")
