@@ -76,6 +76,7 @@ class TeaVMPlugin : Plugin<Project> {
             task.generateSourceMap = extension.generateSourceMap ?: task.generateSourceMap
             task.minified = extension.minified ?: task.minified
             task.runtime = extension.runtime ?: task.runtime
+            task.targetType = extension.targetType ?: task.targetType
         }
     }
 
