@@ -24,6 +24,7 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.TaskAction
+import org.teavm.diagnostics.DefaultProblemTextConsumer
 import org.teavm.tooling.TeaVMTargetType
 import org.teavm.tooling.TeaVMTool
 import org.teavm.tooling.sources.DirectorySourceFileProvider
@@ -125,8 +126,15 @@ open class TeaVMTask : DefaultTask() {
         classLoader.use {
             tool.classLoader = it
             tool.generate()
-            if (!tool.getProblemProvider().getSevereProblems().isEmpty()) {
-                throw GradleException("TeaVM compilation error")
+            if (tool.problemProvider.severeProblems.isNotEmpty()) {
+                val consumer = DefaultProblemTextConsumer();
+                tool.problemProvider.severeProblems.forEach { prob ->
+                    consumer.clear()
+                    prob.render(consumer)
+                    log.error(consumer.toString())
+                }
+
+                throw GradleException("TeaVM compilation errors")
             }
         }
     }
